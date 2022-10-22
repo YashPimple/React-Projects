@@ -13,19 +13,26 @@
         <h1 style="color: green ;"><%= KindOfDay %> ToDo list</h1>
     <% } %> -->
 
-    <h1> <%= KindOfDay %></h1>
-    <ul>
-     <%   for (var i = 0 ; i<newListItems.length ; i++) { %>
-           <li> <%= newListItems[i] %></li> 
-     <%   } %>
-    
-    </ul>
-    
-   <form  class="" action="/" method="post">
-    <input type="text" name="newItem">
+       <div  class="box" id="heading">
+        <h1> <%= KindOfDay %></h1>
+    </div>
 
-    <button type="submit" name="button">ADD</button>
+    <div class="box">
+        <%   for (var i = 0 ; i<newListItems.length ; i++) { %>
+            <div class="item">
+                <input type="checkbox">
+                <p> <%= newListItems[i] %></p> 
+            </div>
+           
+      <%   } %>
 
-   </form>
+      <form  class="item" action="/" method="post">
+        <input type="text" name="newItem" placeholder="New item" autocomplete="off">
+    
+        <button type="submit" name="button">+</button>
+    
+       </form>
+    </div>
+    
 </body>
 </html>
