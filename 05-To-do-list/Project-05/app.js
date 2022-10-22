@@ -5,6 +5,7 @@ const { urlencoded } = require("body-parser");
 const app = express();
 
 let items = ["But food", "Cook food","Eat food"];
+let workItems =[];
 
 app.set("view engine", "ejs");
 
@@ -34,16 +35,40 @@ app.get("/", function(req,res){
 
     
 
-    res.render('list', {KindOfDay : day , newListItems: items});
+    res.render('list', {listTitle : day , newListItems: items});
  
 });
 
 app.post("/", function(request, response){
   let item = request.body.newItem;
 
-  items.push(item);
-  response.redirect("/");
+    if(request.body.list == "Work list"){
+    workItems.push(item);
+    response.redirect("/work");
+  }
+  else{
+    items.push(item);
+    response.redirect("/");
+  }
   
+  
+});
+
+
+app.get("/work",function(req,res){
+    res.render('list', {listTitle: "Work list", newListItems: workItems});
+});
+
+
+
+app.post("/work", function(req,res){
+    let item = req.body.newItem;
+    workItems.push(item);
+    res.redirect("/work ")
+});
+
+app.get("/about",function(req,res){
+  res.render("about");
 });
 
 
@@ -51,4 +76,4 @@ app.listen(3000, function(){
     console.log("Server has started")
 });
 
-//always try to use let or const and not var since var acts as global scope in IF/else case
+
